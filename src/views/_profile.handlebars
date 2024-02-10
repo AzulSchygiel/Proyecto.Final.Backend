@@ -1,0 +1,73 @@
+<div class = "profile_article">
+    <div class="profile_header">
+        <div class ="profile_title">
+            <p>Bienvenido a tu perfil {{userData.user}}.</p><br>
+            <p>Tu tipo de usuario es: {{userData.rol}} </p><br>
+            <p>Tu carrito es: {{userData.cartid}}</p>
+        </div>
+        <div class="logout_button">
+            <form method="post" action="/api/session/logout">
+            <button type="submit">Log Out!</button>
+            </form>
+        </div>
+        {{#ifCond userData.rol '==' "user"}}
+        <div class="logout_button">
+            <a href="/topremium"><button type="submit">Quiero ser Premium</button></a> 
+        </div>
+        {{/ifCond}}
+        {{#ifCond userData.rol '==' "premium"}}
+        <div class="logout_button">
+            <a href="/createProduct"><button type="submit">Agregar Producto</button></a> 
+        </div>
+        {{/ifCond}}
+        {{#ifCond userData.rol '==' "admin"}}
+        <div class="logout_button">
+            <a href="/createProduct"><button type="submit">Agregar Producto</button></a>
+            <a href="/deleteProduct"><button type="submit">Eliminar Productos</button></a>
+        </div>
+        {{/ifCond}}
+    </div>
+    <h1>Vista del carrito</h1>
+{{#if cartProduct._id}}
+    {{#if cartProduct.products}}
+        <h2>Listado de productos agregados</h2>
+        {{#each cartProduct.products}}
+        <div class="each_product">
+            <div class="each_product_img">
+                <img src={{this.product.thumbnail}} alt={{this.product.description}}>
+            </div>
+            <div class = "each_product_text">
+                <p>Product Id: {{this.product._id}}</p>
+                <p>Precio Unitario: {{this.product.price}}</p>
+                <p>Cantidad en el carrito: {{this.quantity}}</p>
+            </div>
+            <div class = "each_product_remove">
+                <form method="post" action="/api/carts/{{../userData.cartid}}/delete/{{this.product._id}}">
+                <button>❌</button>
+                </form>
+            </div>
+        </div>
+        {{/each}}
+        <div class="purchase_buttons">
+            <div class = "confirm_purchase">
+                    <form method="post" action="/api/carts/{{userData.cartid}}/purchase">
+                    <button id="confirm_purchase">Confirmar Compra</button>
+                    </form>
+            </div>
+            <div class = "clear_cart">
+                    <form method="post" action="/api/carts/{{userData.cartid}}/clearcart">
+                    <button id="empty_cart">Vaciar carrito</button>
+                    </form>
+            </div>
+        </div>
+    {{else}}
+        No hay productos en el carrito
+    {{/if}}
+{{else}}
+    <p>No hay detalles</p>
+{{/if}}
+</div>
+
+<link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-borderless@4/borderless.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+<script src="../../public/js/ticket.front.js"></script>

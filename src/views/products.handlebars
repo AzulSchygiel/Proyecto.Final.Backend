@@ -1,0 +1,57 @@
+<div class = "producto__article">
+    <div class="user_data">
+        <h2>Bienvenido: {{userData.user}}</h2>
+        <div class = "user_info">
+            <p>tu pérfil de usuario es: {{userData.rol}} y tu carrito es: {{userData.cartid}}</p>
+        </div>
+        <div>
+            <form method="post" action="/api/session/logout">
+            <button type="submit">Cerrar sesiòn</button>
+            </form>
+        </div>
+    </div>
+    <div id="prodList">
+            {{#each products.docs}}
+                {{#ifCond stock '>' 0}}
+                <div class="tarjeta">
+                        <div class="tarjeta__imagen">
+                            <img src={{thumbnail}} alt={{description}}>
+                        </div>
+                        <div class="tarjeta__info">
+                            <div class="tarjeta__text">
+                                <h3><strong>{{title}}</strong></h3>
+                                <p>ID: {{id}}</p>
+                                <p>Category: {{category}}</p>
+                                <p>{{description}}</p>
+                                <h4>Precio: AR$ {{price}}</h4>
+                            </div>
+                            <div class="tarjeta__button">
+                                {{#if ../userData.cartid}}
+                                <form method="post" action="/api/carts/{{../userData.cartid}}/product/{{id}}">
+                                <button id={{id}} class="prod_button" >Añadir al carrito</button>
+                                </form>
+                                {{else}}
+                                <form method="post" action="/api/carts/error">
+                                <button>Añadir al carrito</button>
+                                </form>
+                                {{/if}}
+                            </div>
+                        </div>
+                </div>
+                {{/ifCond}}
+            {{/each}}
+    </div>
+    <div class="pagination">
+    {{#if products.hasPrevPage}}
+        <a href="/products?page={{products.prevPage}}">Anterior </a>
+    {{/if}}
+    <span>Página {{products.page}} de {{products.totalPages}} </span>
+    {{#if products.hasNextPage}}
+    <a href="/products?page={{products.nextPage}}">Siguiente</a>
+    {{/if}}
+    </div>
+</div>
+
+<link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+<script src="../../public/js/product.front.js"></script>

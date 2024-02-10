@@ -1,0 +1,21 @@
+<div>
+    <h1>Productos real time</h1>
+<ul id="Contenedor">
+    {{#each products}}
+        <li>
+            <p>Id: {{id}}</p>
+            <p>Title: {{title}}</p>
+            <p>Description: {{description}}</p>
+            <p>Price: {{price}} </p>
+            <p>Thumbnail: {{thumbnail}} </p>
+            <p>Code: {{code}}</p>
+            <p>Stock: {{stock}} </p>
+            <p>Category: {{category}} </p>
+            <p>Status: {{status}}</p>
+        </li>
+    {{/each}}
+</ul>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="../../public/js/index.js"></script>

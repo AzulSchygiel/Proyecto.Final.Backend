@@ -1,0 +1,122 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #212529;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto auto;
+    grid-template-areas: "header" "main" "footer";
+}
+
+a {
+    text-decoration: none;
+    color: #f5f5f5;
+}
+
+a:hover {
+    color: #3CA6A6;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1rem;
+}
+
+h4 {
+    font-size: 1rem;
+}
+
+h5 {
+    font-size: 0.75rem;
+}
+
+h6 {
+    font-size: 0.75rem;
+}
+
+p {
+    font-size: 1.3rem;
+}
+
+
+/*-------Header------*/
+.navbar-nav {
+    font-weight: bold;
+}
+
+@media screen and (min-width: 0px) and (max-width: 400px) {
+    .contanier-fluid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .navbar-brand img {
+        max-width: 125px;
+    }
+}
+
+@media screen and (min-width: 401px) {
+    .contanier-fluid {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .navbar-brand img {
+        max-width: 250px;
+    }
+}
+
+/*----hOME----*/
+#main {
+    grid-area: main;
+    background-image: url(../img/background.png);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#sections {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#main section {
+    /* background-color: #0D191C; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    /* background: linear-gradient(hsl(0 0% 0% /0), hsl(255 0% 50%/0.2) 10%, hsl(0 0% 0%/1)); */
+}

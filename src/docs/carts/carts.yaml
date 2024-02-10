@@ -1,0 +1,237 @@
+paths:
+  /api/carts:
+    get:
+      summary: Obtener todos los carritos
+      tags:
+        - Carts
+      responses:
+        "201":
+          description: Se obtuvieron todos los productos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Cart"
+        "404":
+          description: No se pueden obtener los carritos
+    post:
+      sumary: Crear un carrito
+      tags:
+        - Carts
+      responses:
+        "201":
+          description: Carrito creado con exito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Cart"
+        "404":
+          description: Hubo un error al crear el carrito
+
+  /api/carts/{cid}:
+    get:
+      summary: Obtener el carritoo con id = cid
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: True
+          description: cid es el id del carrito que quiero buscar
+          schema:
+            $type: string
+      responses:
+          "201":
+            description: Success!
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#components/schemas/Cart"
+          "404":
+            description: No se pueden obtener el carrito
+    delete:
+      summary: Eliminar el carrito con id = cid
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: True
+          description: cid es el id del carrito que quiero borrar
+          schema:
+            $type: string
+      responses:
+          "201":
+            description: Se ha eliminado el carrito
+          "404":
+            description: No se ha eleiminado el carrito
+
+  /api/carts/{cid}/product:
+    get:
+      summary: Obtener los productos del carritoo con id = cid
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: True
+          description: cid es el id del carrito
+          schema:
+            $type: string
+      responses:
+          "201":
+            description: Success!
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#components/schemas/Cart"
+          "404":
+            description: No se pudieron obtener los productos del carrito
+  
+  /api/carts/{cid}/purchase:
+    post:
+      sumary: Finalizar la compra y generar el ticket del los productos del carrito con id :cid
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: True
+          description: cid es el id del carrito sobre el cual se esta efectuando la compra
+          schema:
+            $type: string
+      responses:
+        "201":
+          description: Exito! se ha generado el ticket
+        "404":
+          description: Error! No se puede finalizar la compra
+
+  /api/carts/{cid}/clearcart:
+    post:
+      sumary: Vaciar el carrito con id = cid
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: True
+          description: cid es el id del carrito que quiero vaciar.
+          schema:
+            $type: string
+      responses:
+        "201":
+          description: Se ha vaciado el carrito
+        "404":
+          description: No se pudo vaciar el carrito
+
+  /api/carts/{cid}/product/{pid}:
+    post:
+      sumary: Agregar el producto con id :pid al carrito con id :cid
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: True
+          description: cid es el id del carrito al que quiero agregar el producto
+          schema:
+            $type: string
+        - name: pid
+          in: path
+          required: True
+          description: pid es el id del producto que quiero agregar al carrito
+          schema:
+            $type: string
+      responses:
+        "201":
+          description: "Producto con id: pid agregado al carrito con id: cid"
+        "404":
+          description: Hubo un error al crear el carrito
+    delete:
+      sumary: Eliminar el producto con id :pid del carrito con id :cid
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: True
+          description: cid es el id del carrito del cual quiero eliminar el producto
+          schema:
+            $type: string
+        - name: pid
+          in: path
+          required: True
+          description: pid es el id del producto que quiero eliminar al carrito
+          schema:
+            $type: string
+      responses:
+        "201":
+          description: "Se ha eliminado el producto del carrito"
+        "404":
+          description: Ha ocurrido un error
+  
+  /api/carts/error:
+    post:
+      sumary: Ruta el error, al no contar con un id del carrito
+      tags:
+        - Carts
+      responses:
+        "201":
+          description: No se pueden obtener el carrito
+        "404":
+          description: Envia directo a la página de error
+
+  /api/carts/{cid}/delete/{pid}:
+    post:
+      sumary: Eliminar el producto con id :pid del carrito con id :cid mediante formulario, debido a que HTML 5 solo soporta los metodos get y post por formulario
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: True
+          description: cid es el id del carrito del cual quiero eliminar el producto
+          schema:
+            $type: string
+        - name: pid
+          in: path
+          required: True
+          description: pid es el id del producto que quiero eliminar al carrito
+          schema:
+            $type: string
+      responses:
+        "201":
+          description: "Se ha eliminado el producto del carrito"
+        "404":
+          description: Ha ocurrido un error
+
+components:
+  schemas:
+    Cart:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id del carrito autogenerado por la base de datos
+        products: 
+          type: array 
+          properties:
+            product:
+              type: string
+              description: Id del producto en el carrito
+            quantity:
+              type: integer
+              description: Cantidad del producto en el carrito
+          description: Objeto con los productos y cantidades del carrito
+      example:
+        _id: ObjectId("6474f5dfe5dafa95add781dd")
+        products:
+          product: 64237ceeb20b6d0d9f9d5936
+          quantity: 1

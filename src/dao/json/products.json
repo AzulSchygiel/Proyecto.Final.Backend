@@ -1,0 +1,90 @@
+[
+    {
+        "_id": 1,
+        "title": "Cafetera Automática",
+        "description": "Cafetera automática con molinillo eléctrico con capacidad para dos bocas, con 25 bares de presión de trabajo.",
+        "price": 10599,
+        "thumbnail": "img",
+        "code": 100,
+        "stock": 10,
+        "category": "cafetra",
+        "status": true
+    },
+    {
+        "_id": 2,
+        "title": "Jarra Barista",
+        "description": "Jarra de dibujo para Barista. Realizada en acero inoxidable con detalles en Cromo.",
+        "price": 5000,
+        "thumbnail": "img",
+        "code": 200,
+        "stock": 5,
+        "category": "bazar",
+        "status": true
+    },
+    {
+        "_id": 3,
+        "title": "Kit Barista",
+        "description": "Kit de Inicio Barista, dabricado en Acero Inoxidable con detalles en cobre.",
+        "price": 6400,
+        "thumbnail": "img",
+        "code": 300,
+        "stock": 2,
+        "category": "bazar",
+        "status": true
+    },
+    {
+        "_id": 4,
+        "title": "Cafetera Chemex",
+        "description": "Elegante cafetera chemex de vidrio resistente a altas temperaturas.",
+        "price": 43000,
+        "thumbnail": "img",
+        "code": 400,
+        "stock": 10,
+        "category": "cafetra",
+        "status": true
+    },
+    {
+        "_id": 5,
+        "title": "Cafetera Moka",
+        "description": "La clásica cafetera Moka Italiana. Material: Acero Inoxidable.",
+        "price": 4500,
+        "thumbnail": "img",
+        "code": 500,
+        "stock": 10,
+        "category": "cafetra",
+        "status": true
+    },
+    {
+        "_id": 6,
+        "title": "Cafetera Bialetti",
+        "description": "Cafetera de diseño desarollada por Bialetti Italia.",
+        "price": 8000,
+        "thumbnail": "img",
+        "code": 600,
+        "stock": 5,
+        "category": "cafetra",
+        "status": true
+    },
+    {
+        "_id": 7,
+        "title": "Café Natural",
+        "description": "Café Natural de altura cosechado a 800 metros sobre el nivel del mar.",
+        "price": 1000,
+        "thumbnail": "img",
+        "code": 700,
+        "stock": 25,
+        "category": "cafe",
+        "status": true
+    },
+    {
+        "_id": 8,
+        "title": "Café Organico",
+        "description": "Café Orgánico certificado de autor.",
+        "price": 1500,
+        "thumbnail": "img",
+        "code": 800,
+        "stock": 25,
+        "category": "cafe",
+        "status": true
+    }
+]

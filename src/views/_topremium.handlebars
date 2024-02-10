@@ -1,0 +1,14 @@
+<div class="createproduct_form">
+    <h1>Información necesaria para solicitar membresia premium</h1> <br>
+    <p>Bienvenido {{userData.user}}.</p> 
+    <form method="post" action="/api/users/{{userData._id}}/documents" enctype="multipart/form-data">
+        <label for="file">Identificación</label><br>
+        <input type="file" placeholder="imagen" name="identificacion"/><br>
+        <label for="file">Domicilio</label><br>
+        <input type="file" placeholder="imagen" name="domicilio"/><br>
+        <label for="file">Estado de cuenta</label><br>
+        <input type="file" placeholder="imagen" name="estadoDeCuenta"/><br>
+
+        <button type="submit">Subir documentos</button>
+    </form>
+</div>

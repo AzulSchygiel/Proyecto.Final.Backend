@@ -1,0 +1,195 @@
+paths:
+  /api/products:
+    get:
+      summary: Obtener todos los productos
+      tags:
+        - Products
+      responses:
+        "201":
+          description: Se obtuvieron todos los productos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Product"
+        "404":
+          description: No se pueden obtener los productos 
+    post:
+      sumary: Crear un Producto, solo Admin o Premium user
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#components/requestBodies/createProduct"
+      responses:
+        "201":
+          description: Producto agregado con exito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Product"
+        "404":
+          description: Error, no se pudo agregar el producto
+
+  /api/products/{pid}:
+    get:
+      summary: Obtener el producto con id = pid
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: True
+          description: pid es el id del producto que quiero buscar
+          schema:
+            $type: string
+      responses:
+          "201":
+            description: Success!
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#components/schemas/Product"
+          "404":
+            description: No se puede obtener el producto deseado
+    put:
+      sumary: Actualizar un producto con id pid, solo Admin
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: True
+          description: pid es el id del producto que quiero actualizar
+          schema:
+            $type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#components/requestBodies/createProduct"
+      responses:
+        "201":
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Product"
+        "404":
+          description: No se pudo actualizar el producto
+    delete:
+      summary: Eliminar el producto con id = pid. Para ello, se debe ser Admin o owner del producto
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: True
+          description: pid es el id del producto que quiero eliminar
+          schema:
+            $type: string
+      responses:
+          "201":
+            description: Producto eliminado"
+          "404":
+            description: No puedes eliminar el producto
+
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id del producto autogenerado por la base de datos
+        title: 
+          type: String 
+          description: Nombre del producto
+        desc:
+          type: String
+          description: Descripción del producto,
+        price:
+          type: Number
+          description: Precio del producto en AR$
+        thumbnail: 
+          type: Array
+          description: URL de la imagen del producto         
+        code:
+          type: Number
+          description: Código del producto. Campo unico
+        stock:
+          type: Number
+          description: Cantidad del producto en Stock
+        category:
+          type: String
+          description: Categoría del producto
+        owner:
+          type: ObjectId,
+          description: Dueño del producto, por default es el administrador.
+        status: 
+          type: Boolean
+          description: True o False. Permite definir el status de un producto, si esta apto para comercializar.
+      example:
+        _id: ObjectId("64237ceeb20b6d0d9f9d5936")
+        status: true
+        category: bazar
+        stock: 10
+        code: 200
+        thumbnail: https://*****************cafe%2Fjarrabarista.png
+        price: 5000
+        desc: Jarra de dibujo para Barista. Realizada en acero inoxidable con detalles en Cromo.
+        title: Jarra Barista
+        owner: ObjectId("6474f60be5dafa95add7820f")
+  requestBodies:
+    createProduct:
+      type: object
+      properties:
+        title: 
+          type: String 
+          description: Nombre del producto
+        desc:
+          type: String
+          description: Descripción del producto,
+        price:
+          type: Number
+          description: Precio del producto en AR$
+        thumbnail: 
+          type: Array
+          description: URL de la imagen del producto         
+        code:
+          type: Number
+          description: Código del producto. Campo unico
+        stock:
+          type: Number
+          description: Cantidad del producto en Stock
+        category:
+          type: String
+          description: Categoría del producto
+        status: 
+          type: Boolean
+          description: True o False. Permite definir el status de un producto, si esta apto para comercializar.
+      example:
+        status: true
+        category: bazar
+        stock: 10
+        code: 200
+        thumbnail: https://*****************cafe%2Fjarrabarista.png
+        price: 5000
+        desc: Jarra de dibujo para Barista. Realizada en acero inoxidable con detalles en Cromo.
+        title: Jarra Barista

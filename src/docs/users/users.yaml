@@ -1,0 +1,66 @@
+paths:
+  /api/users:
+    put:
+      summary: Transformar un usuario en Premium
+      tags:
+        - Users
+      responses:
+        "201":
+          description: "Rol modificado"
+          content:
+            application/json:
+              schema:
+                type: string
+        "404":
+          description: No se pueden obtener los productos 
+  
+  /api/{uid}/documents:
+    post:
+      summary: Ruta para subir los documentos necesarios para valdiar al usuario como premium
+      tags:
+        - Users
+      parameters:
+        - name: uid
+          in: path
+          required: True
+          description: uid es el id del usuario
+          schema:
+            $type: string
+      responses:
+          "201":
+            description: documentos actualizados
+            content:
+              application/json:
+                schema:
+                  type: array
+          "404":
+            description: No se pueden cargar los documentos
+  /:
+    get:
+      summary: ruta para obtener lista de usuarios - solo admin
+      tags:
+        - Users
+      responses:
+          "201":
+            description: Lista de nombre, Apellido, email y rol todos los usuarios
+            content:
+              application/json:
+                schema:
+                  type: array
+          "404":
+            description: No se pueden obtener la lista de usuarios
+
+  /delete:
+    get:
+      summary: ruta para eliminar los usuarios con más de 2horas de inactividad que no sean Admin
+      tags:
+        - Users
+      responses:
+          "201":
+            description: Se han eliminado los usuarios inactivos
+            content:
+              application/json:
+                schema:
+                  type: array
+          "404":
+            description: No se pueden eliminar los usuarios
